@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Points Of Interest</string>
+    <string name="addpoi">Add POI</string>
+    <string name="poiname">POI Name:</string>
+    <string name="poitype">POI type:</string>
+    <string name="poidesc">POI description:</string>
+    <string name="empty_fields">Fields cannot be empty.</string>
+    <string name="prefs">Preferences</string>
+    <string name="savetoweb">Save Added POI\'s to the web</string>
+    <string name="savetowebquestion">Do you want to save newly added POI\'s to the web?</string>
+    <string name="saveall">Save New POI\'s</string>
+    <string name="displaymarkers">Display saved POI\'s</string>
+    <string name="displayfromweb">Display web POI\'s</string>
+</resources>

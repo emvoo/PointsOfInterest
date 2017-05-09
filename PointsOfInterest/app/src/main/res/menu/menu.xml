@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/addpoi"
+        android:title="@string/addpoi"
+        />
+    <item
+        android:id="@+id/savetoweb"
+        android:title="@string/prefs"
+        />
+    <item
+        android:id="@+id/savealladded"
+        android:title="@string/saveall"
+        />
+    <item
+        android:id="@+id/displaymarkers"
+        android:title="@string/displaymarkers"
+        />
+    <item
+        android:id="@+id/displayfromweb"
+        android:title="@string/displayfromweb"
+        />
+</menu>
