@@ -11,4 +11,6 @@
     <string name="saveall">Save New POI\'s</string>
     <string name="displaymarkers">Display saved POI\'s</string>
     <string name="displayfromweb">Display web POI\'s</string>
+    <string name="viewlistofallpois">View list of all POI\'s</string>
+    <string name="allpoislist">All POI\'s list</string>
 </resources>

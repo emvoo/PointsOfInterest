@@ -1,6 +1,8 @@
 package marcin.wisniewski.com.pointsofinterest;
 
-public class POI {
+import java.io.Serializable;
+
+public class POI implements Serializable{
 
     private String name, type, description;
     private Double lat, lon;

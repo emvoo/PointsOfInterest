@@ -36,7 +36,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -57,7 +56,7 @@ public class PointOfInterest extends Activity {
     ArrayList<POI> usersPOIs;
 
     SharedPreferences prefs;
-    boolean savetoweb;
+    boolean savetoweb, follow = true;
 
     /**
      *      OVERRIDES
@@ -282,7 +281,8 @@ public class PointOfInterest extends Activity {
 
         @Override
         public void onLocationChanged(Location location) {
-            updateLoc(location);
+            if(follow)
+                updateLoc(location);
         }
 
         @Override
@@ -349,6 +349,9 @@ public class PointOfInterest extends Activity {
 
     // action to be taken when menu item selected
     public boolean onOptionsItemSelected(MenuItem item){
+
+        follow = true;
+
         // option in the menu to add new POI selected
         if(item.getItemId() == R.id.addpoi){
             Intent intent = new Intent(this, AddPOI.class);
@@ -384,6 +387,15 @@ public class PointOfInterest extends Activity {
             displayWebPOIs();
             return true;
         }
+
+        if(item.getItemId() == R.id.viewlistofallpois){
+            Intent intent = new Intent(this, AllPoisList.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("list", usersPOIs);
+            intent.putExtras(bundle);
+            startActivityForResult(intent, 1);
+            return true;
+        }
         return false;
     }
 
@@ -406,6 +418,24 @@ public class PointOfInterest extends Activity {
                 displayPoiMarker(newPOI);
                 if(savetoweb){
                     saveToWeb(newPOI);
+                }
+            }
+        }
+        if(requestCode == 1){
+            if(resultCode == RESULT_OK){
+                Bundle extras = intent.getExtras();
+                String selected = extras.getString("selectedPOI");
+                try {
+                    JSONObject selectedObj = new JSONObject(selected);
+                    Double latitude = Double.parseDouble(selectedObj.getString("lat"));
+                    Double longitude = Double.parseDouble(selectedObj.getString("lon"));
+                    GeoPoint gp = new GeoPoint(latitude, longitude);
+                    POI newPOI = new POI(selectedObj.getString("name"), selectedObj.getString("type"), selectedObj.getString("description"), latitude, longitude);
+                    displayPoiMarker(newPOI);
+                    mv.getController().setCenter(gp);
+                    follow = false;
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -446,12 +476,17 @@ public class PointOfInterest extends Activity {
 
         try {
             writer = new PrintWriter(new FileWriter(file, true));
-            writer.print(poiname + ','+poitype+','+poidesc+','+lat+','+lon);
+            JSONObject jsonObj = new JSONObject("{\"phonetype\":\"N95\",\"cat\":\"WP\"}");
+            String toJson = "{\"name\":\""+poiname+"\",\"type\":\""+poitype+"\",\"description\":\""+poidesc+"\",\"lon\":\""+lon+"\",\"lat\":\""+lat+"\"}";
+            JSONObject jsonObject = new JSONObject(toJson);
+            writer.print(jsonObject);
             writer.append("\r\n");
             writer.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }

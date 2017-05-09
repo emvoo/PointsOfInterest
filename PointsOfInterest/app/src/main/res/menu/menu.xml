@@ -20,4 +20,8 @@
         android:id="@+id/displayfromweb"
         android:title="@string/displayfromweb"
         />
+    <item
+        android:id="@+id/viewlistofallpois"
+        android:title="@string/viewlistofallpois"
+        />
 </menu>
