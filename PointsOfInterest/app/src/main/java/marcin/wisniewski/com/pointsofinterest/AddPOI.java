@@ -10,10 +10,12 @@ import android.widget.Toast;
 
 public class AddPOI extends Activity implements View.OnClickListener {
     Double lat, lon;
+    MapFragment mapFragment;
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addpoi);
+        mapFragment = (MapFragment)getFragmentManager().findFragmentById(R.id.map_fragment);
         // define a button and attach event listener to it
         Button addpoibtn = (Button)findViewById(R.id.addpoibtn);
         addpoibtn.setOnClickListener(this);
@@ -21,6 +23,7 @@ public class AddPOI extends Activity implements View.OnClickListener {
         Bundle extras = getIntent().getExtras();
         lat = extras.getDouble("lat");
         lon = extras.getDouble("lon");
+        System.out.println(lat);
 
     }
 

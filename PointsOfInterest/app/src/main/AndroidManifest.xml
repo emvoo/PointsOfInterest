@@ -27,8 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".AddPOI" android:label="@string/addpoi"></activity>
-        <activity android:name=".AllPoisList" android:label="@string/allpoislist"></activity>
+        <activity android:name=".AllPoisListActivity" android:label="@string/allpoislist"></activity>
         <activity
             android:name=".PreferencesActivity"
             android:label="@string/prefs">

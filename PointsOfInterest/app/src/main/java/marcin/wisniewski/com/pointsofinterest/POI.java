@@ -7,12 +7,12 @@ public class POI implements Serializable{
     private String name, type, description;
     private Double lat, lon;
 
-    public POI(String name, String type, String description, Double lat, Double lon){
+    public POI(String name, String type, String description, Double lon, Double lat){
         this.name = name;
         this.type = type;
         this.description = description;
-        this.lat = lat;
         this.lon = lon;
+        this.lat = lat;
     }
 
     public String getName() {
